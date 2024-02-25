@@ -1,13 +1,15 @@
 FROM openjdk:21
 
-# Set the working directory in the container
 WORKDIR /app
 
-# Copy the application JAR file into the container at /app
 COPY target/k8s-jenkins-aws-automation-app-0.0.1-SNAPSHOT.jar /app/
 
-# Expose the port that the application will run on
-EXPOSE 8081
+EXPOSE 8080
 
-# Specify the command to run on container start
+ENV DB_NAME=${DB_NAME}
+ENV DB_HOST=${DB_HOST}
+ENV DB_PORT=${DB_PORT}
+ENV DB_USERNAME=${DB_USERNAME}
+ENV DB_PASSWORD=${DB_PASSWORD}
+
 CMD ["java", "-jar", "k8s-jenkins-aws-automation-app-0.0.1-SNAPSHOT.jar"]
